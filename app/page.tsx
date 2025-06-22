@@ -22,8 +22,8 @@ export default function Chat() {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  function handleSend(e: React.FormEvent) {
-    e.preventDefault();
+  function handleSend(_: React.FormEvent) {
+    _.preventDefault();
     if (!input.trim()) return;
 
     setMessages((msgs) => [...msgs, { from: "user", text: input }]);
