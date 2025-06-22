@@ -1,9 +1,10 @@
+"use client";
 import Particles from "react-tsparticles";
-import { loadFull, Engine } from "tsparticles";
+import { loadFull } from "tsparticles";
 import { useCallback } from "react";
 
 export default function AnimatedBackground() {
-  const particlesInit = useCallback(async (engine: Engine) => {
+  const particlesInit = useCallback(async (engine) => {
     await loadFull(engine);
   }, []);
 
@@ -41,7 +42,7 @@ export default function AnimatedBackground() {
             direction: "none",
             random: false,
             straight: false,
-            outModes: { default: "bounce" }, // 修正此处
+            outModes: { default: "bounce" },
           },
           number: { value: 60, density: { enable: true, area: 800 } },
           opacity: { value: 0.6 },
