@@ -14,7 +14,7 @@ export default function Home() {
   const [answer, setAnswer] = useState("");
   const [loading, setLoading] = useState(false);
 
-  async function handleClick(q: string) {
+  async function handleClick(question: string) {
     setLoading(true);
     setAnswer("");
 
@@ -22,12 +22,12 @@ export default function Home() {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ question: q }),
+        body: JSON.stringify({ question }),
       });
 
       const data = await res.json();
       setAnswer(data.answer);
-    } catch (e) {
+    } catch {
       setAnswer("调用失败，请稍后重试");
     } finally {
       setLoading(false);
@@ -35,7 +35,15 @@ export default function Home() {
   }
 
   return (
-    <main style={{ padding: 20, fontFamily: "monospace", background: "#111", color: "#eee", minHeight: "100vh" }}>
+    <main
+      style={{
+        padding: 20,
+        fontFamily: "monospace",
+        background: "#111",
+        color: "#eee",
+        minHeight: "100vh",
+      }}
+    >
       <h1>反问句机</h1>
       <div style={{ marginBottom: 20 }}>
         {questions.map((q) => (
@@ -58,7 +66,9 @@ export default function Home() {
           </button>
         ))}
       </div>
-      <div style={{ minHeight: 80, whiteSpace: "pre-wrap" }}>{loading ? "生成中..." : answer}</div>
+      <div style={{ minHeight: 80, whiteSpace: "pre-wrap" }}>
+        {loading ? "生成中..." : answer}
+      </div>
     </main>
   );
 }

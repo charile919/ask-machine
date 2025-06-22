@@ -1,10 +1,11 @@
-"use client";
+
 import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
 import { useCallback } from "react";
 
 export default function AnimatedBackground() {
-  const particlesInit = useCallback(async (engine) => {
+  // 这里用 any 简单绕过类型错误
+  const particlesInit = useCallback(async (engine: any) => {
     await loadFull(engine);
   }, []);
 
